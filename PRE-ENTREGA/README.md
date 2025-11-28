@@ -1,102 +1,93 @@
-# CURSO_BACKEND_NODE
-Repositorio para las entregas de proyectos
 
-# API CLI - Pre_Entrega
+# Proyecto Backend Node.js
 
-Pequeña aplicación CLI en Node.js que consume la API de ejemplo https://fakestoreapi.com para listar, obtener, crear, actualizar y eliminar productos.
+**Pre-entrega del Curso Backend Node.js**
 
-## Requisitos
+---
 
-- Node.js 18+ (incluye fetch global). Si usas una versión anterior, instala un polyfill como `node-fetch`.
-- Conexión a Internet (se llama a https://fakestoreapi.com).
+Este repositorio contiene la pre-entrega del Curso Backend Node.js. Se trata de una pequeña aplicación CLI en Node.js que consume la API pública [FakeStoreAPI](https://fakestoreapi.com) para listar, obtener, crear, actualizar y eliminar productos.
 
-## Archivos principales
+## Requisitos:
 
-- `index.js` - Punto de entrada; parsea los argumentos de línea de comandos y llama a las funciones del servicio.
-- `serviceApi.js` - Funciones que consumen la API remota con `fetch`.
-- `package.json` - (opcional) metadatos del proyecto.
+- **Node.js 18+** (incluye soporte nativo para `fetch`).  
+  Si usas una versión anterior, instala un polyfill como `node-fetch`.
+- **Conexión a Internet** (la aplicación realiza llamadas a https://fakestoreapi.com).
 
-## Cómo funciona (resumen rápido)
+## Estructura de Archivos
 
-`index.js` lee `process.argv.slice(2)` y espera los argumentos en este orden:
+- `index.js`: Punto de entrada. Parseo de argumentos CLI y llamada a funciones del servicio.
+- `serviceApi.js`: Funciones que consumen la API remota usando `fetch`.
+- `package.json`: Metadatos y scripts del proyecto.
+- Otros archivos y carpetas para configuración y organización interna.
 
-- argumento_0: método HTTP en mayúsculas (`GET`, `POST`, `PUT`, `DELETE`)
+## Uso
 
-- argumento_1: recurso o recurso/id (`products` o `products/1`)
+Abre PowerShell en la carpeta del proyecto y ejecuta los comandos con `npm start`:
 
-- para `POST`: argumento_2 = title, argumento_3 = price, argumento_4 = category
+### Comandos disponibles
 
-- para `PUT`: argumento_1 debe ser `products`, argumento_2 debe ser el id (número) y luego title, price, category
+1. **Listar todos los productos**
+   ```
+   npm start GET products
+   ```
 
-- para `DELETE` y `GET` single: pasar `products/id` como segundo argumento
+2. **Obtener un producto por ID**
+   ```
+   npm start GET products/{id}
+   ```
 
-> Nota importante: el código actual usa diferentes rutas internamente en `serviceApi.js` (por ejemplo, `getSingleProduct` y `deleteProduct` hacen fetch a `${urlService}/${id}`), por lo que los comandos que pasan `products/1` funcionan correctamente (se concatenan sobre la URL base).
+3. **Crear un nuevo producto**
+   ```
+   npm start POST products "title" price "category"
+   ```
+   Ejemplo:
+   ```
+   npm start POST products "microfono" 100.9 "Electronicos"
+   ```
 
-## Uso y ejemplos (PowerShell - Windows)
+4. **Actualizar un producto**
+   ```
+   npm start PUT products {id} "title_new" price "category_new"
+   ```
+   Ejemplo:
+   ```
+   npm start PUT products 21 "microfono" 150.9 "Electronicos"
+   ```
 
-Abrir PowerShell en la carpeta del proyecto y ejecutar con `node`.
+5. **Eliminar un producto**
+   ```
+   npm start DELETE products/{id}
+   ```
+   Ejemplo:
+   ```
+   npm start DELETE products/21
+   ```
 
-- Listar todos los productos (GET /products):
+### Notas importantes
 
-```powershell
-npm start GET products
-```
-
-- Obtener un producto por id (GET /products/:id) — pasar `products/id` como segundo argumento:
-
-```powershell
-npm start GET products/{id=estero}
-```
-
-- Crear un nuevo producto (POST /products):
-
-```powershell
-npm start POST products "title" precio "category"
-```
-
-Asegúrate de encerrar en comillas los argumentos de texto en PowerShell.
-
-- Actualizar un producto (PUT /products/:id):
-
-```powershell
-npm start PUT products {id} "title_new" 150.9 "category_new"
-```
-
-Aquí el id va como tercer argumento (argumentos[2]) y debe ser un número entero. El script valida que argumento 2 contenga solo dígitos antes de convertirlo a número.
-
-- Eliminar un producto (DELETE /products/:id):
-
-```powershell
-npm start DELETE products/{id} 
-```
+- Para **PUT**, el ID debe ser un número entero (argumento 2).
+- En PowerShell, encierra los argumentos de texto entre comillas.
+- Si recibes el mensaje "Comando erroneo...", revisa el orden y cantidad de argumentos.
+- Si `fetch` falla, verifica tu conexión a Internet o el estado de la API.
 
 ## Formato de datos
 
-- `id` (entero positivo)
-- `title` (string)
-- `price` (número)
-- `category` (string)
-
-## Comprobaciones y errores comunes
-
-- Si recibes `Comando erroneo...` revisa el orden y cantidad de argumentos.
-- Para `PUT` el script exige que `argumentos[2]` sea un número (solo dígitos). Si no, no ejecutará la actualización.
-- En PowerShell recuerda escapar/encerrar cadenas con comillas.
-- Si `fetch` falla, revisa la conexión a Internet o el estado de https://fakestoreapi.com
+- `id`: entero positivo
+- `title`: string
+- `price`: número
+- `category`: string
 
 ## Ejemplos rápidos
 
-- Obtener Productos:
-    npm start GET products
+- Listar productos:  
+  `npm start GET products`
+- Obtener producto ID=3:  
+  `npm start GET products/3`
+- Crear producto:  
+  `npm start POST products "microfono" 100.9 "Electronicos"`
+- Actualizar producto ID=21:  
+  `npm start PUT products 21 "microfono" 150.9 "Electronicos"`
+- Eliminar producto ID=21:  
+  `npm start DELETE products/21`
 
-- Obtener Producto id=3:
-    npm start GET products/3
-
-- Crear Nuevo Producto:
-    npm start POST products microfono 100.9 Electronicos
-
-- Actualizar precio Producto id=21:
-    npm start PUT products 21 microfono 150.9 Electronicos
-
-- Eliminar Producto id=21:
-    npm start DELETE products/21
+---
