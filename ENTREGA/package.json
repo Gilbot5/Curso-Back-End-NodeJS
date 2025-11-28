@@ -1,0 +1,38 @@
+{
+  "name": "entrega",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "build": "webpack --config webpack.prod.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gilbot5/Curso-Back-End-NodeJS.git"
+  },
+  "keywords": [],
+  "author": "Gilbert Ordaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gilbot5/Curso-Back-End-NodeJS/issues"
+  },
+  "homepage": "https://github.com/Gilbot5/Curso-Back-End-NodeJS#readme",
+  "description": "Entrega del Proyecto Curso - Backend Node JS",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "firebase": "^12.5.0",
+    "fs": "^0.0.1-security",
+    "joi": "^18.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "process": "^0.11.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
